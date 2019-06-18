@@ -1,5 +1,6 @@
 from caesar import rotate_string
 from flask import Flask, request
+
 def build_page(textarea_content):
     rot_label = "<label>Rotate by:</label>"
     rotation_input = "<input type='number' name='rotation'/>"
@@ -33,6 +34,7 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler)
 ], debug=True)
 
+form = """
 <!DOCTYPE html>
 <html>
     <head>
@@ -47,8 +49,8 @@ app = webapp2.WSGIApplication([
             }
             textarea {
                 margin: 10px 0;
-                width: 540px;
-                height: 120px;
+                width: 540px 0;
+                height: 120px 0;
             }
         </style>
     </head>
@@ -56,3 +58,4 @@ app = webapp2.WSGIApplication([
       <!-- create your form here -->
     </body>
 </html>
+"""
