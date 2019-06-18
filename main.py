@@ -30,7 +30,7 @@ form = """
 
         <form method='post'>
             <label>Rotate by:</label>
-            <input type='number' name='rotation'/>
+            <input type='number' name='rotation' value='0'/>
             <br>
 
             <label>Type a message:</label>
