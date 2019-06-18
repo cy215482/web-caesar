@@ -1,5 +1,6 @@
 from caesar import rotate_string
 from flask import Flask, request
+import cgi
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -49,12 +50,13 @@ def build_page(textarea_content):
 def index():
     return build_page("")
 
-def post(self):
-    message = self.request.get("message")
-    rotation = int(self.request.get("rotation"))
-    encrypted_message = caesar.rotate_character(message, rotation)
+@app.route("/", methods=['POST'])
+def post():
+    message = request.form["message"]
+    rotation = int(request.form["rotation"])
+    encrypted_message = rotate_string(message, rotation)
     escaped_message = cgi.escape(encrypted_message)
     content = build_page(escaped_message)
-    self.response.write(content)
+    return (content)
 
 app.run()
