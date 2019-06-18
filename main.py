@@ -10,19 +10,19 @@ form = """
 <html>
     <head>
         <style>
-            form {
+            form {{
                 background-color: #eee;
                 padding: 20px;
                 margin: 0 auto;
                 width: 540px;
                 font: 16px sans-serif;
                 border-radius: 10px;
-            }
-            textarea {
+            }}
+            textarea {{
                 margin: 10px 0;
                 width: 540px 0;
                 height: 120px 0;
-            }
+            }}
         </style>
     </head>
     <body>
@@ -34,7 +34,7 @@ form = """
             <br>
 
             <label>Type a message:</label>
-            <textarea name='message'></textarea>
+            <textarea name='message'>{0}</textarea>
             <br>
 
             <input type='submit'/>
@@ -48,7 +48,7 @@ def build_page(textarea_content):
 
 @app.route("/")
 def index():
-    return form
+    return form.format("")
 
 @app.route("/", methods=['POST'])
 def post():
@@ -56,7 +56,6 @@ def post():
     rotation = int(request.form["rotation"])
     encrypted_message = rotate_string(message, rotation)
     escaped_message = cgi.escape(encrypted_message)
-    content = build_page(escaped_message)
-    return (content)
+    return form.format(escaped_message)
 
 app.run()
